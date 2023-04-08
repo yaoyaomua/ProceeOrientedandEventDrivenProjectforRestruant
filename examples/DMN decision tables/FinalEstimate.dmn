@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="FinalEstimateV2" name="FinalEstimate" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.6.0">
+  <decision id="FinalEstimate" name="FinalEstimate">
+    <decisionTable id="DecisionTable_0bpb6wx" hitPolicy="FIRST">
+      <input id="InputClause_06t3o78" label="WeatherForecast" biodi:width="228" camunda:inputVariable="WeatherForecast">
+        <inputExpression id="LiteralExpression_0zjb0x7" typeRef="string" expressionLanguage="feel">
+          <text></text>
+        </inputExpression>
+        <inputValues id="UnaryTests_1iioea5">
+          <text></text>
+        </inputValues>
+      </input>
+      <input id="InputClause_11scv93" label="isEventDay" biodi:width="192" camunda:inputVariable="IncomingEvent">
+        <inputExpression id="LiteralExpression_0g6qt0c" typeRef="string" expressionLanguage="feel">
+          <text></text>
+        </inputExpression>
+        <inputValues id="UnaryTests_039fa45">
+          <text></text>
+        </inputValues>
+      </input>
+      <output id="Output_1" label="Final Estimate" name="implevel" typeRef="double" biodi:width="192" />
+      <rule id="DecisionRule_1frgddv">
+        <inputEntry id="UnaryTests_101hxz9">
+          <text>"sunny"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_01tyaun">
+          <text>"yes"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_13ctsqx">
+          <text>1.7</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0dps2le">
+        <inputEntry id="UnaryTests_1n3shfk">
+          <text>"sunny"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1o35996">
+          <text>"no"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1q633o9">
+          <text>1.2</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1nhx3bp">
+        <inputEntry id="UnaryTests_13cisrd">
+          <text>"rain"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0d6irtc">
+          <text>"yes"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0vwzpc5">
+          <text>1.4</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1a4wpjy">
+        <inputEntry id="UnaryTests_0zxx1e6">
+          <text>"rain"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0fny5xd">
+          <text>"no"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0gn94bq">
+          <text>0.9</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1my6ssn">
+        <inputEntry id="UnaryTests_1771i8g">
+          <text>"snow"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1tabehd">
+          <text>"yes"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0b8bbir">
+          <text>1.2</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0psn7z0">
+        <inputEntry id="UnaryTests_1pset6d">
+          <text>"snow"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1nh7l0z">
+          <text>"no"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0szgut6">
+          <text>0.8</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0qgady6">
+        <inputEntry id="UnaryTests_17sjwev">
+          <text>"cloudy"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_00ik36s">
+          <text>"yes"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1wnlf8f">
+          <text>1.5</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0bj6kmh">
+        <inputEntry id="UnaryTests_1j8kvxs">
+          <text>"cloudy"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1iwut3o">
+          <text>"no"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0eva2cp">
+          <text>1.0</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1h9dzs5">
+        <inputEntry id="UnaryTests_0cvms3i">
+          <text>"mist"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_05rh0m2">
+          <text>"yes"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1w080ec">
+          <text>1.3</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0v4bbzf">
+        <inputEntry id="UnaryTests_0h5b30a">
+          <text>"mist"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0blxozu">
+          <text>"no"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0rgemgf">
+          <text>0.85</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1necdwb">
+        <inputEntry id="UnaryTests_0hi2be2">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_062whpe">
+          <text>"yes"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1liolz2">
+          <text>1.5</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1ahnu8b">
+        <inputEntry id="UnaryTests_04cdfk0">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_16r64vy">
+          <text>"no"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1q6doi0">
+          <text>1.0</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="FinalEstimate">
+        <dc:Bounds height="80" width="180" x="160" y="80" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="Definitions_0zjm0c7" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.7.0">
+  <decision id="Decision_196ha79" name="Decide on dish amount sufficiency">
+    <informationRequirement id="InformationRequirement_1ncq2p0">
+      <requiredInput href="#InputData_06zqhar" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_0glv5t1">
+      <requiredInput href="#InputData_01w5r16" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_1k20lt6">
+      <requiredInput href="#InputData_0cv1xxz" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_1gx5gdv">
+      <requiredInput href="#InputData_0rxh1sc" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_06ndflm" hitPolicy="FIRST">
+      <input id="Input_1" camunda:inputVariable="dish_type">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text>Dish type</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1fu1f6v" camunda:inputVariable="time">
+        <inputExpression id="LiteralExpression_1j74isf" typeRef="integer">
+          <text>Current time (hour)</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0gvs3s1" biodi:width="248" camunda:inputVariable="dish_amount">
+        <inputExpression id="LiteralExpression_1t43kj7" typeRef="double">
+          <text>Dish amount (in batches)</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0ey7nh2" label="Customers count">
+        <inputExpression id="LiteralExpression_0dmil5m" typeRef="integer">
+          <text>customer_count</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" name="Dish amount sufficient" typeRef="boolean" />
+      <rule id="DecisionRule_1t6qs0p">
+        <description>After 8pm, the restaurant does not prepare any additional dishes</description>
+        <inputEntry id="UnaryTests_1m6ggpr">
+          <text>any</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_103hn8h">
+          <text>&gt;=20</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1pkz58b">
+          <text>any</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0byu3mc">
+          <text>any</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0fb68qs">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1evazhk">
+        <description>If there are still customers after 6pm and main dish is running out (40%), prepare additional batch which will last until the closing time</description>
+        <inputEntry id="UnaryTests_156e8qs">
+          <text>mainDish</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0trd1k8">
+          <text>&gt;=18</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0626me9">
+          <text>&lt;0.4</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0cvqb4k">
+          <text>&gt;=10</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1ofzhnk">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_19uat4t">
+        <inputEntry id="UnaryTests_1kdn7nz">
+          <text>mainDish</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0l78gqw">
+          <text>&gt;=18</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_18z3vux">
+          <text>&gt;=0.4</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1mjm7b3">
+          <text>&gt;=10</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_015c98p">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_00773u8">
+        <description>When there are not that many customers (&lt;10), the currently served batches (&gt;20%) should be sufficient until the end of the day</description>
+        <inputEntry id="UnaryTests_0lcc8ks">
+          <text>mainDish</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0hq169b">
+          <text>&gt;=18</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0kb2z0p">
+          <text>&gt;=0.2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_06ujonc">
+          <text>&lt;10</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0gbqrtw">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0dec5t5">
+        <description>Less than 20% of main dish is not enough when there are any customers</description>
+        <inputEntry id="UnaryTests_01vs3q6">
+          <text>mainDish</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_06fwg0a">
+          <text>&gt;=18</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_17noerm">
+          <text>&lt;0.2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0gn76id">
+          <text>&lt;10</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_14zkgfw">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_18moxcl">
+        <description>Customer consume more side dishes on average (rice, pasta, noodles etc.). They must also always be available when there are customers, since they accompany any main dish. Therefore, it must be replenished earlier (&lt; 0.8 batch) than main dishes.</description>
+        <inputEntry id="UnaryTests_0q9gv3g">
+          <text>sideDish</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0lhpeft">
+          <text>&lt; 20</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_13zaux2">
+          <text>&lt; 0.8</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0j6js0l">
+          <text>any</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0wtonjc">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1rkx8xv">
+        <description>Before 6pm, if there are any customers and food is running out, prepare and additional batch (it is still early, so the additional food will be consumed eventually throughout the day)</description>
+        <inputEntry id="UnaryTests_1vfiury">
+          <text>any</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1bcy9s5">
+          <text>&lt; 18</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1x1z12b">
+          <text>&lt;0.5</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_14gbmfu">
+          <text>any</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_15axfrz">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1saw136">
+        <inputEntry id="UnaryTests_0od2i73">
+          <text>any</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0fr892z">
+          <text>&lt; 18</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0pye3uk">
+          <text>&gt;=0.5</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_181ka6i">
+          <text>any</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0r4axqq">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="InputData_01w5r16" name="Current time" />
+  <inputData id="InputData_06zqhar" name="Customer count" />
+  <inputData id="InputData_0cv1xxz" name="Dish remaining amount" />
+  <inputData id="InputData_0rxh1sc" name="Dish type" />
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="Decision_196ha79">
+        <dc:Bounds height="80" width="180" x="450" y="240" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_042kncf" dmnElementRef="InputData_01w5r16">
+        <dc:Bounds height="45" width="125" x="367" y="78" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_0hew3b9" dmnElementRef="InputData_06zqhar">
+        <dc:Bounds height="45" width="125" x="158" y="79" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_0gs3bep" dmnElementRef="InputData_0cv1xxz">
+        <dc:Bounds height="45" width="125" x="578" y="79" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1xcegdf" dmnElementRef="InputData_0rxh1sc">
+        <dc:Bounds height="45" width="125" x="758" y="79" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0df91z0" dmnElementRef="InformationRequirement_1ncq2p0">
+        <di:waypoint x="221" y="124" />
+        <di:waypoint x="486" y="220" />
+        <di:waypoint x="486" y="240" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_0jul1bi" dmnElementRef="InformationRequirement_0glv5t1">
+        <di:waypoint x="430" y="123" />
+        <di:waypoint x="522" y="220" />
+        <di:waypoint x="522" y="240" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_0vdbaly" dmnElementRef="InformationRequirement_1k20lt6">
+        <di:waypoint x="641" y="124" />
+        <di:waypoint x="558" y="220" />
+        <di:waypoint x="558" y="240" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_1opuo94" dmnElementRef="InformationRequirement_1gx5gdv">
+        <di:waypoint x="821" y="124" />
+        <di:waypoint x="594" y="220" />
+        <di:waypoint x="594" y="240" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

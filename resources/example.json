@@ -1,0 +1,35 @@
+{
+    "data": [{
+        "date": "2021-04-01",
+        "sales": {
+            "hotDish": {
+                "fried-rice": 45,
+                "fried-noodle": 50,
+                "fashew-Chicken": 63,
+                "shrimp-lo-mein": 45,
+                "sweet-Sour-Chicken": 49
+            },
+            "appetizer": {
+                "spring-roll": 100,
+                "crab-rangoon": 80,
+                "fried-shrimp":70
+            }
+        }
+    }, {
+        "date": "2021-04-02",
+        "sales": {
+            "hotDish": {
+                "fried-rice": 64,
+                "fried-noodle": 34,
+                "fashew-Chicken": 64,
+                "shrimp-lo-mein": 34,
+                "sweet-Sour-Chicken": 64
+            },
+            "appetizer": {
+                "spring-roll": 34,
+                "crab-rangoon": 64,
+                "fried-shrimp":55
+            }
+        }
+    }]
+}
